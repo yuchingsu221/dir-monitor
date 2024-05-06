@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebService</name>
+    </assembly>
+    <members>
+        <member name="M:WebService.Controllers.LoginController.Login(WebService.Models.AppRequest.BackendLoginRequest)">
+            <summary>
+            登入/取得 JWT token
+            </summary>
+            <remarks>
+            ### 流程
+            1. 驗證google recaptcha token是否合法
+            2. 根據request account，進入帳號主表<see cref="!:AuthorizationAccount"/> 取得資料
+            3. 比對table 中加密的密碼是否一致
+            4. 根據role id 取得授權function，加入至jwt token
+            ### 必要篩選條件
+            account 標記刪除為 false
+            </remarks>
+            <response code="422">
+            Unprocessable entity <br/>
+            Error Code: <br/>  
+            0000, 0041, 0042
+            </response>
+            <param name="request">登入請求</param>
+        </member>
+        <member name="M:WebService.Controllers.LoginController.Logout(WebService.Models.AppRequest.LogoutRqModel)">
+            <summary>
+            登出
+            </summary>
+            <param name="rqModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebService.Filters.ResourceFilter.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)">
+            <summary>
+            Request
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:WebService.Filters.ResourceFilter.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)">
+            <summary>
+            Response
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:WebService.Filters.ResourceFilter.PacketErrorResult(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext,CommonLibrary.ErrorCodeEnum,System.Int32,System.String,System.String)">
+            <summary>
+            直接組錯誤訊息
+            </summary>
+            <param name="context"></param>
+            <param name="errorCode"></param>
+            <param name="requestNo"></param>
+            <param name="aesKey"></param>
+            <param name="tag"></param>
+        </member>
+        <member name="P:WebService.Models.AppRequest.BackendLoginRequest.Account">
+            <summary>
+            帳號
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.BackendLoginRequest.Password">
+            <summary>
+            密碼
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.ChangePwdRqModel.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.ChangePwdRqModel.OrigUserPwd">
+            <summary>
+            原使用者密碼
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.ChangePwdRqModel.NewUserPwd">
+            <summary>
+            新使用者密碼
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.GetLoginStatusRqModel.Token">
+            <summary>
+            登入Token
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.LogoutRqModel.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.LoginRsModel.Token">
+            <summary>
+            Login Token
+            </summary>
+        </member>
+        <member name="M:WebService.Services.ApiBaseService.BuildResponsePacket``1(``0,CommonLibrary.ErrorCodeEnum)">
+            <summary>
+            統一處理 reponse 格式
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="content"></param>
+            <param name="errorCode"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

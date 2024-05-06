@@ -1,0 +1,53 @@
+﻿namespace CommonLibrary
+{
+    public enum ErrorCodeEnum
+    {
+        #region 系統相關
+        SUCCESS_CODE = 0000,
+        EXCUTE_ERR_CODE = 9001,
+        END_TO_END_CONNECTION_ERR_CODE = 9002,
+        END_TO_END_CRYPTO_ERR_CODE = 9003,
+        DATA_NOT_FOUND = 9005,
+        PARAMETER_ERR_CODE = 9998,
+        #endregion
+
+
+        #region 登入
+        // 依行內政策禁止行員代他人登入
+        NOT_MEMBER_ERR_CODE = 1002,
+        DISACTIVE_ACCOUNT_ERR_CODE = 1003,
+        FIRST_LOGIN_ERR_CODE = 1004,
+        MIMA_IS_NOT_CHANGE_WITHIN_30DAYS_ERR_CODE = 1005,
+        MIMA_NOT_BEEN_ACTIVE_ERR_CODE = 1006,
+        HAS_NOT_CHANGED_MIMA_FOR_12MONTHS_ERR_CODE = 1007,
+        MIMA_HAS_BEEN_WRONG_FIVE_TIMES_ERR_CODE = 1008,
+        USERNAME_MIMA_CANNOT_NULL_ERR_CODE = 1009,
+        USERNAME_WRONG_ERR_CODE = 1010,
+        MIMA_WRONG_ERR_CODE = 1011,
+        USER_DUPLICATE_LOGIN_ERR_CODE = 1012,
+        SESSION_NOT_FOUND_ERR_CODE = 1016,
+        LOGIN_FAIL_ERR_CODE = 1019,
+        #endregion   
+
+        USER_CODE_NOT_NULL_ERR_CODE = 1025,
+        USER_CODE_NOT_EQUAL_XID_ERR_CODE = 1026,
+        USER_CODE_REGULAR_ERR_CODE = 1027,
+        USER_CODE_ORI_NEW_SAME_ERR_CODE = 1028,
+        USER_CODE_NOT_EQUAL_MIMA_ERR_CODE = 1029,
+
+        USER_MIMA_NOT_NULL_ERR_CODE = 1030,
+        USER_MIMA_NOT_EQUAL_XID_ERR_CODE = 1031,
+        USER_MIMA_NOT_EQUAL_USER_CDOE_ERR_CODE = 1032,
+        USER_MIMA_ORI_NEW_SAME_ERR_CODE = 1033,
+        USER_MIMA_DEFAULT_REGULAR_ERR_CODE = 1035,
+        USER_NOT_MEMBER = 1036,
+        SESSION_FORCE_LOGOUT = 1037,
+        PATTERN_CODE_REPEAT_ERR_CODE = 1038,
+
+        #region 登入
+        Over_Daily_Fail_Times_Limit = 1043,
+        Over_Monthly_Fail_Times_Limit = 1044,
+        #endregion
+
+    }
+}

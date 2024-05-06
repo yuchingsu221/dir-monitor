@@ -1,0 +1,929 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebService</name>
+    </assembly>
+    <members>
+        <member name="M:WebService.Controllers.LoginController.Login(WebService.Models.AppRequest.BackendLoginRequest)">
+            <summary>
+            登入/取得 JWT token
+            </summary>
+            <remarks>
+            ### 流程
+            1. 驗證google recaptcha token是否合法
+            2. 根據request account，進入帳號主表<see cref="!:AuthorizationAccount"/> 取得資料
+            3. 比對table 中加密的密碼是否一致
+            4. 根據role id 取得授權function，加入至jwt token
+            ### 必要篩選條件
+            account 標記刪除為 false
+            </remarks>
+            <response code="422">
+            Unprocessable entity <br/>
+            Error Code: <br/>  
+            0000, 0041, 0042
+            </response>
+            <param name="request">登入請求</param>
+        </member>
+        <member name="M:WebService.Controllers.LoginController.Logout(WebService.Models.AppRequest.LogoutRqModel)">
+            <summary>
+            登出
+            </summary>
+            <param name="rqModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebService.Filters.ResourceFilter.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)">
+            <summary>
+            Request
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:WebService.Filters.ResourceFilter.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)">
+            <summary>
+            Response
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:WebService.Filters.ResourceFilter.PacketErrorResult(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext,CommonLibrary.ErrorCodeEnum,System.Int32,System.String,System.String)">
+            <summary>
+            直接組錯誤訊息
+            </summary>
+            <param name="context"></param>
+            <param name="errorCode"></param>
+            <param name="requestNo"></param>
+            <param name="aesKey"></param>
+            <param name="tag"></param>
+        </member>
+        <member name="P:WebService.Models.AppRequest.BackendLoginRequest.Account">
+            <summary>
+            帳號
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.BackendLoginRequest.Password">
+            <summary>
+            密碼
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.ChangePwdRqModel.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.ChangePwdRqModel.OrigUserPwd">
+            <summary>
+            原使用者密碼
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.ChangePwdRqModel.NewUserPwd">
+            <summary>
+            新使用者密碼
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Course.PostCourseInfoReq.Page">
+            <summary>
+            顯示頁數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Course.PostCourseInfoReq.Per_Page">
+            <summary>
+            一頁顯示筆數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Course.PostCourseInfoReq.Search_Info">
+            <summary>
+            搜尋參數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.GetLoginHistoryRqModel.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.GetLoginStatusRqModel.Token">
+            <summary>
+            登入Token
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.PostGroupContentReq.Group_Id">
+            <summary>
+            分群篩選ID
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.PostGroupDeleteReq.Group_id">
+            <summary>
+            分群篩選ID
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.PostGroupDownloadReq.Group_id">
+            <summary>
+            分群篩選ID
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.PostGroupListReq.Page">
+            <summary>
+            顯示頁數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.PostGroupListReq.Per_Page">
+            <summary>
+            一頁顯示筆數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.PostGroupListReq.Search_Info">
+            <summary>
+            搜尋參數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.PostGroupOverviewReq.Group_id">
+            <summary>
+            分群篩選ID
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.PostGroupSaveReq.Group_id">
+            <summary>
+            分群篩選ID
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.PostGroupSaveReq.Group_name">
+            <summary>
+            分群篩選名稱
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.PostGroupSaveReq.Group_Condition">
+            <summary>
+            分群篩選條件設定
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.Condition.And">
+            <summary>
+            條件選擇：且/或
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.Condition.Group">
+            <summary>
+            篩選條件組合
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.ConditionGroup.And">
+            <summary>
+            條件選擇：且/或
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.ConditionGroup.Option_Title">
+            <summary>
+            篩選條件
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.ConditionGroup.Operate_Type">
+            <summary>
+            篩選條件操作
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.ConditionGroup.Condition_List">
+            <summary>
+            篩選條件內容
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.ConditionGroup.Condition1">
+            <summary>
+            篩選條件範圍：大於
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.ConditionGroup.Condition2">
+            <summary>
+            篩選條件範圍：小於
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.PostGroupSelectValueReq.Select_Condition">
+            <summary>
+            選擇條件
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Group.PostGroupSelectValueReq.Group_Id">
+            <summary>
+            分群篩選ID
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.License.PostLicenseInfoReq.Page">
+            <summary>
+            顯示頁數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.License.PostLicenseInfoReq.Per_Page">
+            <summary>
+            一頁顯示筆數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.License.PostLicenseInfoReq.Search_Info">
+            <summary>
+            搜尋參數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.LoginRqModel.CustId">
+            <summary>
+            身份證字號(統一編號)
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.LoginRqModel.UserCode">
+            <summary>
+            使用者代碼
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.LoginRqModel.UserPwd">
+            <summary>
+            使用者密碼
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.LoginRqModel.ForceLogout">
+            <summary>
+            強制登出重複登入
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.LoginRqModel.DeviceInfo">
+            <summary>
+            裝置資訊
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.LoginRqModel.NewVersion">
+            <summary>
+            新版本判斷
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.LoginRqModel.Lang">
+            <summary>
+            語系代碼
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.LoginRqModel.PushClientId">
+            <summary>
+            推播ID
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.LoginRqModel.IdGateID">
+            <summary>
+            蓋特ID
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.LoginRqModel.Channel">
+            <summary>
+            蓋特通道代碼
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.LogoutRqModel.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Permission.PostPermissionManageReq.Page">
+            <summary>
+            顯示頁數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Permission.PostPermissionManageReq.Per_Page">
+            <summary>
+            一頁顯示筆數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Permission.PostPermissionManageReq.Search_Info">
+            <summary>
+            搜尋參數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Project.PostProjectInfoReq.Page">
+            <summary>
+            顯示頁數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Project.PostProjectInfoReq.Per_Page">
+            <summary>
+            一頁顯示筆數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Project.PostProjectInfoReq.Search_Info">
+            <summary>
+            搜尋參數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Project.PostProjectTagsReq.Page">
+            <summary>
+            顯示頁數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Project.PostProjectTagsReq.Per_Page">
+            <summary>
+            一頁顯示筆數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Project.PostProjectTagsReq.Search_Info">
+            <summary>
+            搜尋參數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Course.PostCourseInfoRes.Page">
+            <summary>
+            顯示頁數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Course.PostCourseInfoRes.Per_Page">
+            <summary>
+            一頁顯示筆數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Course.PostCourseInfoRes.Total_Courses">
+            <summary>
+            搜尋課程總數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Course.CourseData.Id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Course.CourseData.Sunnet_Id">
+            <summary>
+            旭聯ID
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Course.CourseData.Course_No">
+            <summary>
+            課程編號
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Course.CourseData.Course_Name">
+            <summary>
+            課程名稱
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Course.CourseData.Class_No">
+            <summary>
+            班次代碼
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Course.CourseData.Class_Name">
+            <summary>
+            班次名稱
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Course.CourseData.All_Tags">
+            <summary>
+            課程標籤
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Course.CourseData.Num_Of_Employees">
+            <summary>
+            人數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.PostGroupContentRes.Group_Name">
+            <summary>
+            分群篩選名稱
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.PostGroupContentRes.Group_Condition">
+            <summary>
+            分群篩選條件設定
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.PostGroupDownloadRes.Download_Excel">
+            <summary>
+            下載excel 二進位檔
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.PostGroupListRes.Page">
+            <summary>
+            顯示頁數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.PostGroupListRes.Per_Page">
+            <summary>
+            一頁顯示筆數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.PostGroupListRes.Total_Group">
+            <summary>
+            搜尋分群篩選總數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.Group.Group_Id">
+            <summary>
+            分群篩選ID
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.Group.Group_Name">
+            <summary>
+            分群篩選名稱
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Id">
+            <summary>
+            表id
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Group_employees">
+            <summary>
+            分群人數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Developers">
+            <summary>
+            技術人才數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Dev_Group_Rate">
+            <summary>
+            技術人才分群佔比
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Dev_Total_Rate">
+            <summary>
+            技術人才集團佔比
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Sum_Score">
+            <summary>
+            綜合分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Software_Score">
+            <summary>
+            軟體力分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Data_Score">
+            <summary>
+            數據力分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Ai_Score">
+            <summary>
+            演算力分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Security_Score">
+            <summary>
+            資安力分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Ms_Score">
+            <summary>
+            微服務力分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Cloud_Score">
+            <summary>
+            雲服務力分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.tech_tags_score">
+            <summary>
+            技術標籤與分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Theme_Tags_Score">
+            <summary>
+            主題標籤與分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Area_Tags_Score">
+            <summary>
+            領域標籤與分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Tech_Tags_Rate">
+            <summary>
+            技術標籤有效佔比
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Theme_Tags_Rate">
+            <summary>
+            主題標籤有效佔比
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Area_Tags_Rate">
+            <summary>
+            領域標籤有效佔比
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Bi">
+            <summary>
+            BI佔比
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Bu">
+            <summary>
+            BU佔比
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Software_Range">
+            <summary>
+            軟體力分數分組
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Data_Range">
+            <summary>
+            數據力分數分組
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Ai_Range">
+            <summary>
+            演算力分數分組
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Security_Range">
+            <summary>
+            資安力分數分組
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Ms_Range">
+            <summary>
+            微服務力分數分組
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Cloud_Range">
+            <summary>
+            雲服務力分數分組
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Create_Date">
+            <summary>
+            建立日期
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Create_Time">
+            <summary>
+            建立時間
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.DataList.Update_Time">
+            <summary>
+            更新時間
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.TechTagScore.C">
+            <summary>
+            C++標籤分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.TechTagScore.Java">
+            <summary>
+            Java標籤分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.TechTagScore.Python">
+            <summary>
+            Python標籤分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.TechTagScore.SQL">
+            <summary>
+            SQL標籤分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.ThemeTagScore.AI">
+            <summary>
+            AI標籤分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.ThemeTagScore.Database">
+            <summary>
+            Database標籤分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.ThemeTagScore.Game">
+            <summary>
+            Game標籤分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.ThemeTagScore.Web">
+            <summary>
+            Web標籤分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.AreaTagScore.Education">
+            <summary>
+            教育標籤分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.AreaTagScore.Finance">
+            <summary>
+            金融標籤分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.AreaTagScore.Healthcare">
+            <summary>
+            衛生保健標籤分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.AreaTagScore.Retail">
+            <summary>
+            零售標籤分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.BiProportion.Bi">
+            <summary>
+            BI名稱
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.BiProportion.Employees">
+            <summary>
+            BI人數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.BiProportion.Rate">
+            <summary>
+            BI比例
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.BuProportion.Bu">
+            <summary>
+            BU名稱
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.BuProportion.Employees">
+            <summary>
+             BU人數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.BuProportion.Rate">
+            <summary>
+            BU比例
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.ScoreGroup.Lv1_dev">
+            <summary>
+            lv1人數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.ScoreGroup.Lv2_dev">
+            <summary>
+            lv2人數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.ScoreGroup.Lv3_dev">
+            <summary>
+            lv3人數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.ScoreGroup.Lv4_dev">
+            <summary>
+            lv4人數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.ScoreGroup.Lv5_dev">
+            <summary>
+            lv5人數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.ScoreGroup.Lv1_score">
+            <summary>
+            lv1分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.ScoreGroup.Lv2_score">
+            <summary>
+            lv2分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.ScoreGroup.Lv3_score">
+            <summary>
+            lv3分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.ScoreGroup.Lv4_score">
+            <summary>
+            lv4分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.ScoreGroup.Lv5_score">
+            <summary>
+            lv5分數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.PostGroupSelectValueRes.Group_Name">
+            <summary>
+            分群篩選名稱
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Group.PostGroupSelectValueRes.Group_Condition">
+            <summary>
+            分群篩選條件設定
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.License.PostLicenseInfoRes.Page">
+            <summary>
+            顯示頁數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.License.PostLicenseInfoRes.Per_Page">
+            <summary>
+            一頁顯示筆數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.License.PostLicenseInfoRes.Total_Licenses">
+            <summary>
+            搜尋證照總數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.License.LicenseData.Id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.License.LicenseData.License_Name">
+            <summary>
+            證照名稱
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.License.LicenseData.License_Name_Abbr">
+            <summary>
+            證照簡稱
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.License.LicenseData.Manufacturer_Name">
+            <summary>
+            原廠名稱
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.License.LicenseData.All_Tags">
+            <summary>
+            證照標籤
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.License.LicenseData.Num_Of_Employees">
+            <summary>
+            人數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.LoginRsModel.Token">
+            <summary>
+            Login Token
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Permission.PostPermissionManageRes.Page">
+            <summary>
+            顯示頁數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Permission.PostPermissionManageRes.Per_Page">
+            <summary>
+            一頁顯示筆數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Permission.PostPermissionManageRes.Total_Permissions">
+            <summary>
+            搜尋權限總數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Permission.PermissionData.BI">
+            <summary>
+            BI
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Permission.PermissionData.BU">
+            <summary>
+            BU
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Permission.PermissionData.Department">
+            <summary>
+            部門
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Permission.PermissionData.Employee_No">
+            <summary>
+            員工編號
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Permission.PermissionData.Employee_Name">
+            <summary>
+            員工姓名
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Permission.PermissionData.Status">
+            <summary>
+            在職狀態
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Permission.PermissionData.Role">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Permission.PermissionData.State">
+            <summary>
+            狀態
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.PostProjectInfoRes.Page">
+            <summary>
+            顯示頁數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.PostProjectInfoRes.Per_Page">
+            <summary>
+            一頁顯示筆數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.PostProjectInfoRes.Total_Projects">
+            <summary>
+            搜尋專案總數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.ProjectData.Id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.ProjectData.Project_No">
+            <summary>
+            專案代碼
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.ProjectData.Project_Name">
+            <summary>
+            專案名稱
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.ProjectData.Start_Date">
+            <summary>
+            專案起日
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.ProjectData.End_Date">
+            <summary>
+            專案訖日
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.ProjectData.All_Tags">
+            <summary>
+            專案標籤
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.ProjectData.Num_Of_Employees">
+            <summary>
+            專案參與人數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.PostProjectTagsRes.Page">
+            <summary>
+            顯示頁數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.PostProjectTagsRes.Per_Page">
+            <summary>
+            一頁顯示筆數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.PostProjectTagsRes.Total_Tags">
+            <summary>
+            搜尋標籤總數
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.TagData.Field">
+            <summary>
+            欄位
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.TagData.Field_Name">
+            <summary>
+            欄位名稱
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.TagData.Used">
+            <summary>
+            是否採用
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppResponse.Project.TagData.All_Tags">
+             <summary>
+            標籤規則
+             </summary>
+        </member>
+        <member name="M:WebService.Services.ApiBaseService.BuildResponsePacket``1(``0,CommonLibrary.ErrorCodeEnum)">
+            <summary>
+            統一處理 reponse 格式
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="content"></param>
+            <param name="errorCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebService.Services.Interfaces.ICourseService.PostCourseInfo(WebService.Models.AppRequest.Course.PostCourseInfoReq)">
+            <summary>
+            取得課程資訊
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebService.Services.Interfaces.ILicenseService.PostLicenseInfo(WebService.Models.AppRequest.License.PostLicenseInfoReq)">
+            <summary>
+            取得證照資訊
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebService.Services.Interfaces.IProjectService.PostProjectInfo(WebService.Models.AppRequest.Project.PostProjectInfoReq)">
+            <summary>
+            取得專案資訊
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Models</name>
+    </assembly>
+    <members>
+        <member name="P:Models.Models.DirectoryClass.Name">
+            <summary>
+            資料夾名稱
+            </summary>
+        </member>
+        <member name="P:Models.Models.DirectoryClass.IsFolder">
+            <summary>
+            是否為資料夾
+            </summary>
+        </member>
+        <member name="P:Models.Models.DirectoryClass.Directories">
+            <summary>
+            該資料夾底下之資料夾
+            </summary>
+        </member>
+        <member name="P:Models.Models.DirectoryClass.Files">
+            <summary>
+            該資料夾底下之檔案
+            </summary>
+        </member>
+        <member name="P:Models.Models.ErrorFileObject.DirectoryName">
+            <summary>
+            檔案位置
+            </summary>
+        </member>
+        <member name="P:Models.Models.ErrorFileObject.Name">
+            <summary>
+            檔案名稱
+            </summary>
+        </member>
+        <member name="P:Models.Models.ErrorFileObject.CreationTime">
+            <summary>
+            檔案建立時間
+            </summary>
+        </member>
+        <member name="P:Models.Models.ErrorFileObject.Length">
+            <summary>
+            檔案大小
+            </summary>
+        </member>
+        <member name="P:Models.Models.ErrorFiles.Files">
+            <summary>
+            不在白名單內之檔案資訊
+            </summary>
+        </member>
+        <member name="P:Models.Models.FileToJson.Name">
+            <summary>
+            檔案名稱
+            </summary>
+        </member>
+        <member name="P:Models.Models.FileToJson.IsFolder">
+            <summary>
+            是否為資料夾
+            </summary>
+        </member>
+        <member name="P:Models.Models.FileToJson.CreationTime">
+            <summary>
+            檔案建立時間
+            </summary>
+        </member>
+        <member name="P:Models.Models.FileToJson.UpdatedTime">
+            <summary>
+            檔案更新時間
+            </summary>
+        </member>
+        <member name="P:Models.Models.FileToJson.Length">
+            <summary>
+            檔案大小
+            </summary>
+        </member>
+        <member name="P:Models.Models.ModifyFileObject.Type">
+            <summary>
+            新增/刪除/編輯
+            </summary>
+        </member>
+        <member name="F:Models.Models.TypeEnum.Create">
+            <summary>
+            新增
+            </summary>
+        </member>
+        <member name="F:Models.Models.TypeEnum.Delete">
+            <summary>
+            刪除
+            </summary>
+        </member>
+        <member name="F:Models.Models.TypeEnum.Update">
+            <summary>
+            編輯
+            </summary>
+        </member>
+        <member name="P:Models.Models.ModifyFiles.Files">
+            <summary>
+            異動檔案清單
+            </summary>
+        </member>
+        <member name="T:Models.Enum.AuthorizationFunctionEnum">
+            <summary>
+            所有的授權功能 (只有子項目)
+            中文名稱必須和DB一樣 很重要!!
+            中文名稱必須和DB一樣 很重要!! 
+            中文名稱必須和DB一樣 很重要!!
+            </summary>
+        </member>
+        <member name="F:Models.Enum.MemberTypeEnum.Facebook">
+            <summary>
+            Facebook
+            </summary>
+        </member>
+        <member name="F:Models.Enum.MemberTypeEnum.Line">
+            <summary>
+            Line
+            </summary>
+        </member>
+        <member name="F:Models.Enum.MemberTypeEnum.Google">
+            <summary>
+            Google
+            </summary>
+        </member>
+        <member name="F:Models.Enum.MemberTypeEnum.Apple">
+            <summary>
+            Apple
+            </summary>
+        </member>
+        <member name="F:Models.Enum.MemberTypeEnum.Phone">
+            <summary>
+            Phone
+            </summary>
+        </member>
+        <member name="F:Models.Enum.MemberTypeEnum.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Config.Logs">
+            <summary>
+            log 存放目錄
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Config.MailSettings">
+            <summary>
+            發信相關設定值
+            </summary>
+        </member>
+        <member name="P:WebService.Models.AppRequest.Config.Dirs">
+            <summary>
+            欲掃描之指定目錄資訊
+            </summary>
+        </member>
+    </members>
+</doc>
